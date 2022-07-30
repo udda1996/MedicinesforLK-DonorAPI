@@ -127,8 +127,8 @@ service /donor on new http:Listener(9090) {
             foreach AidPackageItem aidPackageItem in aidPackageItems {
                 sql:ExecutionResult _ = check dbClient->execute(`UPDATE MEDICAL_NEED SET NEEDEDQUANTITY = NEEDEDQUANTITY + ${aidPackageItem.quantity} WHERE NEEDID=${aidPackageItem.needID};`);
             }
-            sql:ExecutionResult _ = check dbClient->execute(`DELETE FROM AID_PACKAGE_ITEM WHERE PACKAGEID=${AidPackageID}`);
-            sql:ExecutionResult _ = check dbClient->execute(`DELETE FROM AID_PACKAGE WHERE PACKAGEID=${AidPackageID}`);
+            sql:ExecutionResult _ = check dbClient->execute(`DELETE FROM AID_PACKAGE_ITEM WHERE PACKAGEID=${AidPackageID};`);
+            sql:ExecutionResult _ = check dbClient->execute(`DELETE FROM AID_PACKAGE WHERE PACKAGEID=${AidPackageID};`);
 
             check commit;
         }
